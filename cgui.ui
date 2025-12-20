@@ -11,16 +11,16 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>CGUI</string>
+   <string>Gestion du ATECC608B (v1.0) by PhA @2025-2026</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTextEdit" name="teStatus">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>30</y>
+      <x>10</x>
+      <y>170</y>
       <width>731</width>
-      <height>501</height>
+      <height>361</height>
      </rect>
     </property>
    </widget>
@@ -36,6 +36,191 @@
     <property name="text">
      <string>ATECC608B</string>
     </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>30</y>
+      <width>351</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Zones</string>
+    </property>
+    <widget class="QPushButton" name="pbEtatCFG">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>92</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Etat CFG</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lZoneData">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>30</y>
+       <width>131</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Zone DATA</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::TextFormat::RichText</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lZoneConfig">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>161</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Zone CONFIG</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::TextFormat::RichText</enum>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pbLireCFG">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>92</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Lire CFG</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pbEtatDATA">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>50</y>
+       <width>92</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Etat DATA</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>181</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Init</string>
+    </property>
+    <widget class="QPushButton" name="pbVersion">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>92</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Version</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pbSerie">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>80</y>
+       <width>92</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>N° de série</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>30</y>
+      <width>181</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Slots</string>
+    </property>
+    <widget class="QSpinBox" name="sbSlot">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>47</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>15</number>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pbSlots">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>30</y>
+       <width>92</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Slots</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>70</y>
+       <width>92</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Générer</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

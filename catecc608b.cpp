@@ -3,7 +3,15 @@
 CATECC608B::CATECC608B(QObject *parent)
     : QObject{parent}
 {
+    ATCA_STATUS status = init();
+    if (status != ATCA_SUCCESS) {
+        emit sig_erreur(status);
+    } // if status
+}
 
+CATECC608B::~CATECC608B()
+{
+    atcab_release();
 }
 
 ATCA_STATUS CATECC608B::init()
@@ -38,7 +46,6 @@ ATCA_STATUS CATECC608B::lireNoSerie(QString &s)
 
     status = atcab_read_serial_number(serial);
     if (status != ATCA_SUCCESS) {
-        atcab_release();
         emit sig_erreur(status);
         return status;
     } // if status
@@ -46,7 +53,6 @@ ATCA_STATUS CATECC608B::lireNoSerie(QString &s)
     for(int i=0 ; i<9 ; i++) {
         s+=QString::number(serial[i],16)+" ";
     } // for
-    atcab_release();
     return status;
 }
 
@@ -64,4 +70,61 @@ ATCA_STATUS CATECC608B::lireInfoRevision(QString &rev)
     } // if
     emit sig_erreur(status);
     return status;
+}
+
+ATCA_STATUS CATECC608B::lireConfigZone(QString &cz)
+{
+    uint8_t config_data[128];
+    ATCA_STATUS status = atcab_read_config_zone(config_data);
+    if (status != ATCA_SUCCESS) {
+        emit sig_erreur(status);
+        return -1;
+    } // if status
+
+    for (int i = 0; i < 128; i++) {
+        cz+=QString::number(config_data[i],16)+" ";
+        if ((i+1) % 16 == 0) cz+="\n";
+    } // for
+    return ATCA_SUCCESS;
+}
+
+int CATECC608B::lireSlot(int noSlot, QString &slot)
+{
+    if ( (noSlot<0) || (noSlot>15)) {
+        emit sig_erreur(-1);
+        return -1;
+    } // if noSlot
+
+    // Cette fonction lit un "block" de 32 octets.
+    uint8_t slot_data[32];
+    ATCA_STATUS status = atcab_read_zone(ATCA_ZONE_DATA, noSlot, 0, 0, slot_data, sizeof(slot_data));
+    if (status != ATCA_SUCCESS) {
+        emit sig_erreur(status);
+        return -1;
+    }
+
+    for (int i = 0; i < 32; i++) {
+        slot+=QString::number(slot_data[i],16)+" ";
+        if ((i+1) % 16 == 0) slot+="\n";
+    }
+    return ATCA_SUCCESS;
+}
+
+ATCA_STATUS CATECC608B::isZoneCFGLocked(bool &zoneCFG)
+{
+    ATCA_STATUS status = atcab_is_locked(ATCA_ZONE_CONFIG, &zoneCFG);
+    if (status != ATCA_SUCCESS) {
+        emit sig_erreur(status);
+    } // if
+    return (status == ATCA_SUCCESS) ? 0 : -1;
+}
+
+
+ATCA_STATUS CATECC608B::isZoneDataLocked(bool &zoneData)
+{
+    ATCA_STATUS status = atcab_is_locked(ATCA_ZONE_DATA, &zoneData);
+    if (status != ATCA_SUCCESS) {
+        emit sig_erreur(status);
+    } // if
+    return (status == ATCA_SUCCESS) ? 0 : -1;
 }
